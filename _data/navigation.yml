@@ -19,8 +19,8 @@ main:
 # 2022.02.15 sidebar update : simple ver.
 categories:
   - title: "Algorithm"
-    url: /categories/Algorithm/
+    url: /categories/algorithm/
   - title: "DevOps"
-    url: /categories/DevOps/
+    url: /categories/devops/
   - title: "ETC"
-    url: /categories/ETC/
+    url: /categories/etc/
