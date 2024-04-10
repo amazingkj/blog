@@ -24,7 +24,7 @@ title_separator: "&#124;"
 subtitle: # site tagline that appears below site title in masthead
 name: "jiin" # 블로그 닉네임 설정
 description: "개발블로그" # 블로그 설명
-url: "https://github-account.github.io" # 블로그 URL
+url: "https://amazingkj.github.io/blog/" # 블로그 URL
 baseurl: # the subpath of your site, e.g. "/blog"
 repository: "amazingkj/amazingkj.github.io/blog" # GitHub Repo 이름
 teaser: #
