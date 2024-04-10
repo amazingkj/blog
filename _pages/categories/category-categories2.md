@@ -1,9 +1,9 @@
 ---
-title: "Categories2"
+title: "DevOps"
 layout: category
-permalink: /categories/categories2/
+permalink: /categories/devops/
 author_profile: true
-taxonomy: Categories2
+taxonomy: DevOps
 sidebar:
   nav: "categories"
 ---

@@ -1,0 +1,128 @@
+---
+title: "[OKD] 자주 쓰는 oc명령어 "
+excerpt: "자주 쓰는 oc명령어"
+
+categories:
+  - DevOps
+tags:
+  - [okd, oc명령어]
+
+permalink: /devops/okd-oc/
+
+toc: true
+toc_sticky: true
+
+date: 2024-04-10
+last_modified_at: 2024-04-10
+---
+
+## 🦥 본문
+## 로그인
+
+Login: `oc login 서버주소 –username={username} –password={password}`  
+Logout: `oc logout`  
+Config 정보: `oc config view`  
+로그인 되어있는 계정 상태 보기 : `oc whoami`    
+
+## 프로젝트
+
+프로젝트 생성: `oc new-project {프로젝트이름} –display-name={display-name} –description={description}`  
+프로젝트 삭제: `oc delete project {프로젝트이름}`  
+프로젝트 선택: `oc project {프로젝트 이름}`  
+프로젝트 리스트 정보: `oc get projects`  
+
+## 정보 확인
+
+각 리소스 shortnames 확인 : `oc api-resources`  
+현재 클러스터 상태 확인 : `oc get clusteroperator` ,`oc get co`, `oc status`   
+작성된 machineconfig 조회 : `oc get mc`   
+machineconfig 삭제 : `oc delete {config name} {삭제할 노드 역할, 예) master}`   
+machineconfigpool 변경 반영 현황 조회 : `oc get mcp`  
+
+노드 확인 : `oc get nodes`
+
+노드 디버깅 : `oc debug node/{node name}`
+
+노드 디버깅 후, 이미지 실행중인지 확인
+
+```java
+# chroot /host
+# sudo crictl images | grep {component}
+# 또는 sudo crictl ps
+
+```
+
+cluster-info 명령으로 로그 생성: `oc cluster-info dump -n openshift-storage --output-directory={directory-name}`
+
+## yaml 파일 적용
+
+yaml 파일 적용: `oc apply -f {파일 경로/파일명}`
+
+## 시크릿 생성
+
+Docker 레지스트리와 함께 사용할 시크릿을 생성: `oc create secret docker-registry my-secret --docker-server={DOCKER_REGISTRY_SERVER} --docker-username={DOCKER_USER} --docker-password={DOCKER_PASSWORD} --docker-email={DOCKER_EMAIL}`
+
+## 자주쓰는 명령어
+
+전체 파드 노드 정보 확인 `oc get pod -A -o wide`  
+
+특정 프로젝트의 전체 확인 `oc get all`
+
+특정 파드 로그 확인 `oc logs {pod-name} -n {namespace}`
+
+## 리소스 생성/삭제/확인
+
+`oc {get, delete, logs, describe 등} {resource type}/{resource name}`
+
+### APP
+
+App 생성: `oc new-app openshift/{선택한 프레임워크 name}~{repository주소} 
+#master –name={application name} –context-dir={context-dir}`  
+App 삭제: `oc delete all -l application={application name}`   
+Openshiftimagestream 정보: `oc get is -n openshift`   
+Openshifttemplate 정보: `oc get template -n openshift`
+
+### Build
+
+Build 리스트 정보: `oc get builds` Build 실행: `oc start-build bc/{bulid name}`  
+Build 정보: `oc get build/{bulid name}` Build cancel: `oc cancel-build {bulid name}`   
+Build config 정보: `oc get bc` Build log 정보: `oc logs -f build/{bulid name}`   
+Build environment 설정: `oc set bc/{bulid name} {env name}={env-value}`   
+Build environment 정보: `oc env bc/{bulid name}`
+
+### ImageStream
+
+ImageStream리스트 정보: `oc get is`   
+ImageStream정보: `oc get is/{imagestream name}`
+
+### Deploy
+
+Deploy config 정보: `oc get dc`   
+Deploy history 출력: `oc rollout history dc/{deploy-name}`   
+Deploy 실행: `oc rollout latest dc/{deploy-name}`  
+Deploy 취소: `oc rollout cancel dc/{deploy-name}`   
+Deploy environment 설정: `oc set dc/{deploy-name} {env-name}={env-value}`   
+Deploy environment 정보: `oc env dc/{build-name}`
+
+### Pod
+
+Pod 리스트 정보: `oc get pods`  
+Pod 정보: `oc get pod/{pod name}`  
+Pod 실행 상태 정보: `oc get rc`
+
+### Service
+
+Service 리스트 정보: `oc get service`  
+Service 정보: `oc get service/{service-name}`
+
+### Route
+
+Route 생성: `oc expose service/{service-name} --name`  
+Route 리스트 정보: `oc get routes --name={생성할 서비스 이름} --port={사용할 포트}--path={contextdir}`  
+Route 정보: `oc get route/{route-name}`
+
+## 그 외 명령어 정보
+
+공식문서에서 확인 :
+
+https://access.redhat.com/documentation/ko-kr/openshift_container_platform/4.13/html/cli_tools/openshift-cli-oc
