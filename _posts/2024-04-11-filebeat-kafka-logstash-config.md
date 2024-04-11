@@ -3,7 +3,7 @@ title: "[Kafka] filebeat, kafka, logstash 설정값과 설명"
 excerpt: "filebeat, kafka, logstash 설정값과 설명"
 
 categories:
-  - Categories2
+  - ETC
 tags:
   - [filebeat, kafka, logstash]
 
